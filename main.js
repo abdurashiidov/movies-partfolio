@@ -1,7 +1,14 @@
 let father = document.querySelector(".father")
 
 function render(data, ota)
-data.map
+data.map(elem =>{
+    let div = document.querySelector("div")
+    let h1 = document.querySelector("h1")
+    let img = document.querySelector("img")
+    let p = document.querySelector("p")
+
+    h1.textContent = elem.Title
+})
 
 
 
