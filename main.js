@@ -1,3 +1,5 @@
+// ! backgraund
+
 var c = document.getElementById('canv'), 
     $ = c.getContext("2d");
 var w = c.width = window.innerWidth, 
@@ -53,3 +55,5 @@ window.addEventListener('resize', function(){
   c.width = w = window.innerWidth;
   c.height = h = window.innerHeight;
 }, false);
+
+// ! end background
