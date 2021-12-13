@@ -1,14 +1,10 @@
-@import url(https://fonts.googleapis.com/css?family=Molle:400italic&subset=latin,latin-ext);
-body {
-  background-color: black;
-  margin: 0px;
-  overflow: hidden;
-  font-family: 'Molle', "Arial", sans-serif, cursive;
-  z-index: -100;
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #000;
 }
 
-.father {
-  z-index: 100;
-  color: white;
+canvas {
+  display: block;
 }
 /*# sourceMappingURL=main.css.map */
