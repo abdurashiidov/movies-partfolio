@@ -1,13 +1,8 @@
-body,
-html {
-  background-color: #111;
-  height: 100%;
-  width: 100%;
-}
-
-.snow {
-  height: 100%;
-  position: absolute;
-  width: 100%;
+@import url(https://fonts.googleapis.com/css?family=Molle:400italic&subset=latin,latin-ext);
+body {
+  background-color: black;
+  margin: 0px;
+  overflow: hidden;
+  font-family: 'Molle', cursive;
 }
 /*# sourceMappingURL=main.css.map */
