@@ -1,4 +1,7 @@
+let father = document.querySelector(".father")
 
+function render(data, ota)
+data.map
 
 
 
