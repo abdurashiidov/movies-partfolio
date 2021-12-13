@@ -12,6 +12,8 @@ body {
   height: 10px;
   background: white;
   border-radius: 50%;
+  background-attachment: fixed;
+  width: 10px;
 }
 
 .snow:nth-child(1) {
