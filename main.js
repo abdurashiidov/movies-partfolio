@@ -2,10 +2,10 @@ let father = document.querySelector(".father")
 
 function render(data, ota){
     data.map(elem =>{
-        let div = document.querySelector("div")
-        let h1 = document.querySelector("h1")
-        let img = document.querySelector("img")
-        let p = document.querySelector("p")
+        let div = document.createElement("div")
+        let h1 = document.createElement("h1")
+        let img = document.createElement("img")
+        let p = document.createElement("p")
 
         h1.textContent = elem.Title
         img.setAttribute("src", elem.Images)
@@ -18,7 +18,6 @@ function render(data, ota){
         div.appendChild(p)
 
         ota.appendChild(div)
-
     })
 }
 render(films, father)
