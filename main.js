@@ -1,59 +1,162 @@
 // ! backgraund
 
-var c = document.getElementById('canv'), 
-    $ = c.getContext("2d");
-var w = c.width = window.innerWidth, 
-    h = c.height = window.innerHeight;
+window.addEventListener('resize', function()
+{
+  jsCanvasSnow.resize(window.innerWidth, window.innerHeight);
+    jsCanvasSnow.init();
+}, false);
 
-Snowy();
-function Snowy() {
-  var snow, arr = [];
-  var num = 600, tsc = 1, sp = 1;
-  var sc = 1.3, t = 0, mv = 20, min = 1;
-    for (var i = 0; i < num; ++i) {
-      snow = new Flake();
-      snow.y = Math.random() * (h + 50);
-      snow.x = Math.random() * w;
-      snow.t = Math.random() * (Math.PI * 2);
-      snow.sz = (100 / (10 + (Math.random() * 100))) * sc;
-      snow.sp = (Math.pow(snow.sz * .8, 2) * .15) * sp;
-      snow.sp = snow.sp < min ? min : snow.sp;
-      arr.push(snow);
-    }
-  go();
-  function go(){
-    window.requestAnimationFrame(go);
-      $.clearRect(0, 0, w, h);
-      $.fillStyle = 'hsla(242, 95%, 3%, 1)';
-      $.fillRect(0, 0, w, h);
-      $.fill();
-        for (var i = 0; i < arr.length; ++i) {
-          f = arr[i];
-          f.t += .05;
-          f.t = f.t >= Math.PI * 2 ? 0 : f.t;
-          f.y += f.sp;
-          f.x += Math.sin(f.t * tsc) * (f.sz * .3);
-          if (f.y > h + 50) f.y = -10 - Math.random() * mv;
-          if (f.x > w + mv) f.x = - mv;
-          if (f.x < - mv) f.x = w + mv;
-          f.draw();}
- }
- function Flake() {
-   this.draw = function() {
-      this.g = $.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.sz);
-      this.g.addColorStop(0, 'hsla(255,255%,255%,1)');
-      this.g.addColorStop(1, 'hsla(255,255%,255%,0)');
-      $.moveTo(this.x, this.y);
-      $.fillStyle = this.g;
-      $.beginPath();
-      $.arc(this.x, this.y, this.sz, 0, Math.PI * 2, true);
-      $.fill();}
-  }
+window.addEventListener('load', function()
+{
+  jsCanvasSnow.init();
+  jsCanvasSnow.start();
+}, false);
+
+function jsParticle(origin, velocity, size, amplitude)
+{
+	this.origin = origin;
+	this.position = new Vector2(origin.x, origin.y);
+	this.velocity = velocity || new Vector2(0, 0);
+	this.size = size;
+	this.amplitude = amplitude;
+	
+	// randomize start values a bit
+	this.dx = Math.random() * 100;
+	
+	this.update = function(delta_time)
+	{
+		this.position.y += this.velocity.y * delta_time;
+		
+		// oscilate the x value between -amplitude and +amplitude
+		this.dx += this.velocity.x*delta_time;		
+		this.position.x = this.origin.x + (this.amplitude * Math.sin(this.dx));
+	};
 }
 
-window.addEventListener('resize', function(){
-  c.width = w = window.innerWidth;
-  c.height = h = window.innerHeight;
-}, false);
+var jsCanvasSnow = 
+{
+	canvas : null,
+	ctx : null,
+	particles : [],
+	running : false,
+	
+	start_time : 0,
+	frame_time : 0,
+
+	init : function( )
+	{
+		// use the container width and height
+		this.canvas = document.getElementById('particle_canvas');
+		this.ctx = this.canvas.getContext('2d');
+    this.resize(window.innerWidth, window.innerHeight);    
+
+		// change these values
+    // the 2 element arrays represent min and max values
+		this.pAmount = 5000;         // amount of particles
+		this.pSize = [0.5 , 1.5];    // min and max size
+		this.pSwing = [0.1, 1];      // min and max oscilation speed for x movement
+		this.pSpeed = [40, 100],     // min and max y speed
+		this.pAmplitude = [25, 50];  // min and max distance for x movement
+		
+    this._init_particles();
+	},
+	
+	start : function()
+	{
+		this.running = true;
+		this.start_time = this.frame_time = microtime();
+		this._loop();
+	},
+	
+	stop : function()
+	{
+		this.running = false;
+	},
+  
+  resize : function(w, h)
+  {
+    this.canvas.width = w;
+    this.canvas.height = h;
+  },
+	
+	_loop : function()
+	{
+		if ( jsCanvasSnow.running )
+		{
+			jsCanvasSnow._clear();
+			jsCanvasSnow._update();
+			jsCanvasSnow._draw();
+			jsCanvasSnow._queue();
+		}
+	},	
+	
+	_init_particles : function()
+	{
+		// clear the particles array
+		this.particles.length = 0;
+		
+		for ( var i = 0 ; i < this.pAmount ; i++) 
+		{
+			var origin = new Vector2(frand(0, this.canvas.width), frand(-this.canvas.height, 0));
+			var velocity = new Vector2(frand(this.pSwing[0],this.pSwing[1]), frand(this.pSpeed[0],this.pSpeed[1]));
+			var size = frand(this.pSize[0], this.pSize[1]);
+			var amplitude = frand(this.pAmplitude[0], this.pAmplitude[1]);
+			
+			this.particles.push(new jsParticle(origin, velocity, size, amplitude));
+		}
+	},
+
+	_update : function()
+	{
+		// calculate the time since the last frame
+		var now_time = microtime();
+		var delta_time = now_time - this.frame_time;
+		
+		for ( var i = 0 ; i < this.particles.length ; i++)
+		{
+			var particle = this.particles[i];
+			particle.update(delta_time);
+			
+			if (particle.position.y-particle.size > this.canvas.height)
+			{
+				// reset the particle to the top and a random x position
+				particle.position.y = -particle.size;
+				particle.position.x = particle.origin.x = Math.random() * this.canvas.width;
+				particle.dx = Math.random() * 100;
+			}			
+		}
+		
+		// save this time for the next frame
+		this.frame_time = now_time;
+	},
+	
+	_draw : function()
+	{
+		this.ctx.fillStyle = 'rgb(255,255,255)';
+		
+		for ( var i = 0 ; i < this.particles.length ; i++)
+		{
+			var particle = this.particles[i];
+			this.ctx.fillRect(particle.position.x, particle.position.y, particle.size, particle.size);
+		}
+	},
+	
+	_clear : function()
+	{
+		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+	},
+	
+	_queue : function()
+	{
+		window.requestAnimationFrame( jsCanvasSnow._loop );
+	}
+};
+
+
+
+
+
+
+
 
 // ! end background
