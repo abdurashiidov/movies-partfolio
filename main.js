@@ -20,7 +20,7 @@ function render(data, ota){
         ota.appendChild(div)
     })
 }
-render(films, father)
+render(films_01, father)
 
 
 
