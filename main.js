@@ -8,6 +8,11 @@ data.map(elem =>{
     let p = document.querySelector("p")
 
     h1.textContent = elem.Title
+    img.setAttribute("src", elem.Images)
+    p.textContent = elem.Plot
+
+    
+
 })
 
 
