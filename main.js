@@ -7,6 +7,11 @@ function render(data, ota){
         let img = document.createElement("img")
         let p = document.createElement("p")
 
+
+        h1.style.color = "white"
+        p.style.color = "white"
+
+
         h1.textContent = elem.Title
         img.setAttribute("src", elem.Images)
         p.textContent = elem.Plot
