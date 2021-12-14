@@ -19,16 +19,8 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-}
-
-.snow {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  background: white;
-  border-radius: 50%;
-  background-attachment: fixed;
-  width: 10px;
+  width: 300px;
+  height: 400px;
 }
 
 .snow:nth-child(1) {
