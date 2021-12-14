@@ -36,9 +36,11 @@ body {
         padding: 10px;
         // background-color: #1D232C;
         margin: 0 auto;
+        border-radius: 50px;
         
         &:hover{
           box-shadow: 0 34px 58px rgba(255, 245, 245, 0.25), 0 10px 500px rgba(224, 218, 218, 0.22)
+          
         }
       }
       .title3{
@@ -52,12 +54,9 @@ body {
         width: 300px;
         // height: 300px;
         margin: 0 auto;
+        border-radius: 50px;
     }
       
-
-.slick-active{
-  margin: 0 auto;
-}
 
 
 
