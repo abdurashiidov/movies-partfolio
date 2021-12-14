@@ -34,7 +34,7 @@ let father3 = document.querySelector(".father3")
 function render3(data3, ota3){
     data3.map(elem3 =>{
         let div3 = document.createElement("div")
-        let title3 = document.createElement("h1")
+        let title3 = document.createElement("h2")
         let img3 = document.createElement("img")
         let info3 = document.createElement("p")
 
@@ -43,7 +43,8 @@ function render3(data3, ota3){
         img3.setAttribute("src", elem3.Images)
         info3.textContent = elem3.Plot
 
-        div3.classList.add("boxs2")
+        div3.classList.add("boxs3")
+        img3.setAttribute("class", "img3")
 
         div3.appendChild(img3)
         div3.appendChild(title3)
