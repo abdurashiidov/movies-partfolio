@@ -1,6 +1,5 @@
 body {
   background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
-  background-repeat: no-repeat;
 }
 
 .father {
@@ -39,21 +38,30 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  width: 300px;
+  width: 280px;
   height: 500px;
-  margin: 10px;
+  margin: 5px;
   border: 5px solid red;
   padding: 10px;
-  background-color: #1D232C;
+  margin: 0 auto;
+  border-radius: 20px;
+  margin-right: 5px;
+}
+
+.father3 .boxs3 .title3 {
+  color: red;
+  width: 20px;
 }
 
 .father3 .boxs3:hover {
-  -webkit-box-shadow: 0 34px 28px rgba(255, 245, 245, 0.25), 0 10px 10px rgba(224, 218, 218, 0.22);
-          box-shadow: 0 34px 28px rgba(255, 245, 245, 0.25), 0 10px 10px rgba(224, 218, 218, 0.22);
+  -webkit-filter: drop-shadow(0 0 10px #2c61f3);
+          filter: drop-shadow(0 0 10px #2c61f3);
 }
 
-.father3 .img3 {
-  width: 300px;
+.img3 {
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 15px;
 }
 
 .snow:nth-child(1) {
