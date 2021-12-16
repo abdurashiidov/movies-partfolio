@@ -31,8 +31,8 @@
 // ! Slick
 let father3 = document.querySelector(".father3")
 
-function render3(data3, ota3){
-    data3.map(elem3 =>{
+function render3(data3, ota3) {
+    data3.map(elem3 => {
         let div3 = document.createElement("div")
         let title3 = document.createElement("h2")
         let img3 = document.createElement("img")
@@ -53,9 +53,29 @@ function render3(data3, ota3){
         ota3.appendChild(div3)
 
     })
-} 
+}
 render3(films_01, father3)
 
 
 
 
+
+var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+
+var raw = JSON.stringify({
+    "name-singup": username, userpassword,
+    "username-password": username-password.value,
+});
+0
+var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+};
+
+fetch("http://10.10.112.95:8008/login", requestOptions)
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
