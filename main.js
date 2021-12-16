@@ -60,22 +60,3 @@ render3(films_01, father3)
 
 
 
-var myHeaders = new Headers();
-myHeaders.append("Content-Type", "application/json");
-
-var raw = JSON.stringify({
-    "name-singup": username, userpassword,
-    "username-password": username-password.value,
-});
-0
-var requestOptions = {
-    method: 'POST',
-    headers: myHeaders,
-    body: raw,
-    redirect: 'follow'
-};
-
-fetch("http://10.10.112.95:8008/login", requestOptions)
-    .then(response => response.text())
-    .then(result => console.log(result))
-    .catch(error => console.log('error', error));
