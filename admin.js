@@ -30,6 +30,7 @@ fetch("http://10.10.112.95:8008/register", requestOptions)
     .then(response => response.text())
     .then(result => {
             if (result == "ok" ) {
+                window.localStorage.setItem("token" , result)
                 window.location = "firstindex.html"      
             } else{
                 alert("Bu malumot mavjud")

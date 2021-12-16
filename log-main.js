@@ -31,12 +31,16 @@ var requestOptions = {
 fetch("http://10.10.112.95:8008/login", requestOptions)
     .then(response => response.text())
     .then(result => {
-            if (result == "ok" ) {
-                alert("Bu malumot mavjud emas")
-                window.location = "admin.html"      
-            } else{
-                window.location = "index.html"
+            if (result == '["user not found"]') {
 
+                alert("Bu malumot mavjud emas")
+                window.location = "admin.html"  
+            } else if("token" != result){
+                window.location = "admin.html"
+            }
+            else  {
+                window.location = "index.html"
+                window.localStorage.setItem("token", result)
             }
     })
     .catch(error => console.log('error', error));
