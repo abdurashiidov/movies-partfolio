@@ -4,14 +4,14 @@ let btn = document.querySelector(".btn")
 
 
 btn.addEventListener("click", () =>{
-    // if(!window.localStorage.getItem(userName.value)){
-    //     window.localStorage.setItem(userName.value, parol.value)
-    //     alert("Ro'yxatdan o'ting")
-    //     window.location = "admin.html"
+    if(!window.localStorage.getItem(userName.value)){
+        window.localStorage.setItem(userName.value, parol.value)
+        alert("Ro'yxatdan o'ting")
+        window.location = "admin.html"
 
-    // } else {
-    //     alert("Mavjud")
-    // }
+    } else {
+        alert("Mavjud")
+    }
 
     var myHeaders = new Headers();
 myHeaders.append("Content-Type", "application/json");

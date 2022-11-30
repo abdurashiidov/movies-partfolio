@@ -4,12 +4,12 @@ let signButton = document.querySelector(".sign_button")
 
 signButton.addEventListener("click", () =>{
 
-//     if (window.localStorage.getItem(nameSingUp.value) && window.localStorage.getItem(nameSingUp.value) == 
-//     usernamePassword.value){
-//             window.location = "index.html"            
-//     } else{
-//              alert("ErrorError! Password or login error!❌❌❌❌❌ ")
-//         }
+    if (window.localStorage.getItem(nameSingUp.value) && window.localStorage.getItem(nameSingUp.value) == 
+    usernamePassword.value){
+            window.location = "index.html"            
+    } else{
+             alert("ErrorError! Password or login error!❌❌❌❌❌ ")
+        }
 
 var myHeaders = new Headers();
 myHeaders.append("Content-Type", "application/json");
